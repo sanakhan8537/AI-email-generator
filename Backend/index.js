@@ -1,16 +1,18 @@
 const express = require('express');
-const app =  express();
+const app=express();
 const UserRouter = require('./routers/UserRouter');
-const ProductRouter = require('./routers/ProductRouter');
-
-//using the productRouter
-app.use('/product',ProductRouter);
+const AIRouter = require('./routers/AIRouter');
+const cors = require('cors');
 
 const port = 5000;
-//loaclhost:5000 request in thunder
-
 //middleware for user
+
+app.use(cors({
+    origin: ['http://localhost:3000']
+}))
+app.use(express.json());
 app.use('/user', UserRouter);
+app.use('/ai', AIRouter);
 //this for userrouter 
 //localhost:5000/user/add or whatever from userrouter.js in thunder 
 
